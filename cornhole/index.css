@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+body {
+    text-align: center;
+    font-family: 'Comfortaa', sans-serif;
+    color: white;
+    background-color: #1f1f1f;
+}
+.bluescore {
+    background-color: blue;
+    text-align: center;
+    border-radius: 20px;
+    margin: 1vw;
+    font-size: 30px;
+    border: none;
+}
+.redscore {
+    background-color: red;
+    text-align: center;
+    border-radius: 20px;
+    margin: 1vw;
+    font-size: 30px;
+    border: none;
+}
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+}  
+
+.flex-child:first-child {
+    margin-right: 20px;
+} 
+
+.selector-container {
+    border-radius: 20px;
+    margin: 1vw;
+}
+.htmlbutton {
+    margin: 1vw;
+    padding: 15px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+.htmlbutton:active {
+    background-color: gray;
+}
+#app {
+    background-color: #1f1f1f;
+}
