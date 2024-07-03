@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hands and Feet Scorekeeper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hands and Feet Scorekeeper</h1>
+
+        <form id="add-player-form">
+            <input type="text" id="player-name" placeholder="Player Name" required>
+            <button type="submit">Add Player</button>
+        </form>
+
+        <form id="add-score-form">
+            <select id="player-select" required></select>
+            <input type="number" id="player-score" placeholder="Score" required>
+            <button type="submit">Add Score</button>
+        </form>
+
+        <h2>Scores</h2>
+        <ul id="score-list"></ul>
+    </div>
+
+    <script>
+        const players = [];
+
+        document.getElementById('add-player-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const playerName = document.getElementById('player-name').value;
+            if (playerName) {
+                players.push({ name: playerName, scores: [] });
+                updatePlayerSelect();
+                updateScoreList();
+                document.getElementById('player-name').value = '';
+            }
+        });
+
+        document.getElementById('add-score-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const playerName = document.getElementById('player-select').value;
+            const score = parseInt(document.getElementById('player-score').value, 10);
+            if (playerName && !isNaN(score)) {
+                const player = players.find(player => player.name === playerName);
+                if (player) {
+                    player.scores.push(score);
+                    updateScoreList();
+                    document.getElementById('player-score').value = '';
+                }
+            }
+        });
+
+        function updatePlayerSelect() {
+            const playerSelect = document.getElementById('player-select');
+            playerSelect.innerHTML = '';
+            players.forEach(player => {
+                const option = document.createElement('option');
+                option.value = player.name;
+                option.textContent = player.name;
+                playerSelect.appendChild(option);
+            });
+        }
+
+        function updateScoreList() {
+            const scoreList = document.getElementById('score-list');
+            scoreList.innerHTML = '';
+            players.forEach(player => {
+                const listItem = document.createElement('li');
+                const totalScore = player.scores.reduce((acc, score) => acc + score, 0);
+                listItem.textContent = `${player.name}: ${totalScore}`;
+                scoreList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
