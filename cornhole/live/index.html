@@ -3,20 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scoreboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Cornhole Score Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .half {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+        }
+        .red-half {
+            background-color: red;
+        }
+        .blue-half {
+            background-color: blue;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="team blue">
-            <h1>Test 2 and Test 3</h1>
-            <div class="score" id="blueScore" onclick="incrementScore('blue')">0</div>
-        </div>
-        <div class="team red">
-            <h1>Test 1 and Test 4</h1>
-            <div class="score" id="redScore" onclick="incrementScore('red')">0</div>
+    <div class="half red-half">
+        <div>
+            <p>Team 1 Score: <span id="team1-score">0</span></p>
         </div>
     </div>
-    <script src="index.js"></script>
+    <div class="half blue-half">
+        <div>
+            <p>Team 2 Score: <span id="team2-score">0</span></p>
+        </div>
+    </div>
+    <script>
+        function getScores() {
+            const scores = JSON.parse(localStorage.getItem('cornholeScores')) || { team1: 0, team2: 0 };
+            document.getElementById('team1-score').textContent = scores.team1;
+            document.getElementById('team2-score').textContent = scores.team2;
+        }
+        
+        // Update scores every second
+        setInterval(getScores, 1000);
+    </script>
 </body>
 </html>
