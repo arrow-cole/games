@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Cornhole Score</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .score-input {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .score-input input {
+            font-size: 1em;
+        }
+        .update-button {
+            font-size: 1em;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Cornhole Score</h1>
+    <div class="score-input">
+        <label for="team1-score">Team 1 Score: </label>
+        <input type="number" id="team1-score" value="0">
+    </div>
+    <div class="score-input">
+        <label for="team2-score">Team 2 Score: </label>
+        <input type="number" id="team2-score" value="0">
+    </div>
+    <button class="update-button" onclick="updateScores()">Update Scores</button>
+    <script>
+        function updateScores() {
+            const team1Score = document.getElementById('team1-score').value;
+            const team2Score = document.getElementById('team2-score').value;
+            
+            const scores = {
+                team1: parseInt(team1Score),
+                team2: parseInt(team2Score)
+            };
+            
+            localStorage.setItem('cornholeScores', JSON.stringify(scores));
+        }
+    </script>
+</body>
+</html>
