@@ -18,24 +18,35 @@
             align-items: center;
             color: white;
             font-size: 2em;
-        }
-        .blue-half {
-            background-color: blue;
+            position: relative;
         }
         .red-half {
             background-color: red;
         }
+        .blue-half {
+            background-color: blue;
+        }
+        .winner {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="half blue-half">
-        <div>
-            <p>Team 1 Score: <span id="team1-score">0</span></p>
-        </div>
-    </div>
     <div class="half red-half">
         <div>
+            <p>Team 1 Score: <span id="team1-score">0</span></p>
+            <p id="team1-winner" class="winner" style="display:none;">Winner!</p>
+        </div>
+    </div>
+    <div class="half blue-half">
+        <div>
             <p>Team 2 Score: <span id="team2-score">0</span></p>
+            <p id="team2-winner" class="winner" style="display:none;">Winner!</p>
         </div>
     </div>
     <script>
@@ -43,6 +54,18 @@
             const scores = JSON.parse(localStorage.getItem('cornholeScores')) || { team1: 0, team2: 0 };
             document.getElementById('team1-score').textContent = scores.team1;
             document.getElementById('team2-score').textContent = scores.team2;
+            
+            if (scores.team1 > 21) {
+                document.getElementById('team1-winner').style.display = 'block';
+            } else {
+                document.getElementById('team1-winner').style.display = 'none';
+            }
+            
+            if (scores.team2 > 21) {
+                document.getElementById('team2-winner').style.display = 'block';
+            } else {
+                document.getElementById('team2-winner').style.display = 'none';
+            }
         }
         
         // Update scores every second
